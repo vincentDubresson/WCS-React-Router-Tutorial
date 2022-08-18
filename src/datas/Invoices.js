@@ -38,3 +38,11 @@ let invoices = [
 export function getInvoices() {
     return invoices;
 }
+
+/* Ici, nous créeons une fonction qui va nous servir à récupérer
+    les données d'une facture en fonction de son 'id'. */
+export function getInvoice(number) {
+    return invoices.find(
+        (invoice) => invoice.number === number
+    );
+}
