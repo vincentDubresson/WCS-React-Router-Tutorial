@@ -24,6 +24,16 @@ root.render(
         {/* Nous imbriquons les routes filles afin d'éviter une répétition du code
             notamment pour la Navbar */}
         <Route path="invoices" element={<Invoices />}>
+          {/* Ici, nous rajoutons une route 'index' qui affichera le contenu
+              désiré lorsque nous afficherons la page. */}
+          <Route
+            index
+            element={
+              <div style={{ padding: "1rem" }}>
+                <p>Select an invoice</p>
+              </div>
+            }
+          />
           {/* Ici, nous rajoutons une route enfant qui nous servira à afficher le
               détail d'une facture. ':invoiceId' est un param qui sera appelé grâce à
               la fonction useParam() dans le fichier 'invoice.jsx' */}
