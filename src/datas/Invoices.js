@@ -39,6 +39,13 @@ export function getInvoices() {
     return invoices;
 }
 
+/* Cette fonction va nous permettre de supprimer 'virtuellement' une facture */
+export function deleteInvoice(number) {
+    invoices = invoices.filter(
+      (invoice) => invoice.number !== number
+    );
+  }
+
 /* Ici, nous créeons une fonction qui va nous servir à récupérer
     les données d'une facture en fonction de son 'id'. */
 export function getInvoice(number) {
