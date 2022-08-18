@@ -3,7 +3,7 @@
  * Ce n'est pas obligatoire mais cela rend l'organisation plus simple
  * si vous êtes ammené à développer un grosse application.
  */
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { getInvoices } from '../datas/Invoices';
 
 export default function Invoices() {
@@ -18,24 +18,25 @@ export default function Invoices() {
                 padding: "1rem 0"
             }}
         >
-        <nav
-          style={{
-            borderRight: "solid 1px",
-            padding: "1rem",
-          }}
-        >
-          {/* La fonction map sert à créer un nouveau tableau à partir d'un tableau.
-                Ici, elle nous sert à transformer notre tableau de données en liens. */}
-          {invoices.map((invoice) => (
-            <Link
-              style={{ display: "block", margin: "1rem 0" }}
-              to={`/invoices/${invoice.number}`}
-              key={invoice.number}
+            <nav
+            style={{
+                borderRight: "solid 1px",
+                padding: "1rem",
+            }}
             >
-              {invoice.name}
-            </Link>
-          ))}
-        </nav>
+            {/* La fonction map sert à créer un nouveau tableau à partir d'un tableau.
+                    Ici, elle nous sert à transformer notre tableau de données en liens. */}
+            {invoices.map((invoice) => (
+                <Link
+                style={{ display: "block", margin: "1rem 0" }}
+                to={`/invoices/${invoice.number}`}
+                key={invoice.number}
+                >
+                {invoice.name}
+                </Link>
+            ))}
+            </nav>
+            <Outlet />
       </div>
     );
 }

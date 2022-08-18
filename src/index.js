@@ -13,6 +13,7 @@ import App from './App';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Invoices from './routes/Invoices';
 import Expenses from './routes/Expenses';
+import Invoice from './routes/Invoice';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,7 +23,12 @@ root.render(
       <Route path="/" element={<App />}>
         {/* Nous imbriquons les routes filles afin d'éviter une répétition du code
             notamment pour la Navbar */}
-        <Route path="invoices" element={<Invoices />} />
+        <Route path="invoices" element={<Invoices />}>
+          {/* Ici, nous rajoutons une route enfant qui nous servira à afficher le
+              détail d'une facture. ':invoiceId' est un param qui sera appelé grâce à
+              la fonction useParam() dans le fichier 'invoice.jsx' */}
+          <Route path=":invoiceId" element={<Invoice />}/>
+        </Route>
         <Route path="expenses" element={<Expenses />} />
         {/* Ici, nous allons ajouter une route "sans correspondance" (fausse page "404 not found")
             qui s'affichera si une toute autre route que celle prédéfinie ci-dessus est appelée. */}
