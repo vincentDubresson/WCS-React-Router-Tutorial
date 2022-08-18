@@ -19,9 +19,12 @@ root.render(
   <Router>
     {/* Nous allons intégrer directement ici toutes les routes */}
     <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/invoices" element={<Invoices />} />
-      <Route path="/expenses" element={<Expenses />} />
+      <Route path="/" element={<App />}>
+        {/* Nous imbriquons les routes filles afin d'éviter une répétition du code
+            notamment pour la Navbar */}
+        <Route path="invoices" element={<Invoices />} />
+        <Route path="expenses" element={<Expenses />} />
+      </Route>
     </Routes>
   </Router>
 );
