@@ -24,6 +24,16 @@ root.render(
             notamment pour la Navbar */}
         <Route path="invoices" element={<Invoices />} />
         <Route path="expenses" element={<Expenses />} />
+        {/* Ici, nous allons ajouter une route "sans correspondance" (fausse page "404 not found")
+            qui s'affichera si une toute autre route que celle prédéfinie ci-dessus est appelée. */}
+        <Route
+          path="*"
+          element={
+            <main style={{ padding: "1rem 0" }}>
+              <p>There's nothing here!</p>
+            </main>
+          }
+        />
       </Route>
     </Routes>
   </Router>
