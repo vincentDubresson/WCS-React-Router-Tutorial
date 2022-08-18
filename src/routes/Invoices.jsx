@@ -3,8 +3,15 @@
  * Ce n'est pas obligatoire mais cela rend l'organisation plus simple
  * si vous êtes ammené à développer un grosse application.
  */
-import { NavLink, Outlet, useSearchParams } from 'react-router-dom';
+import { NavLink, Outlet, useSearchParams, useLocation } from 'react-router-dom';
 import { getInvoices } from '../datas/Invoices';
+
+/* Cette fonction va nous servir à garder en mémoire l'état de la liste des
+factures, même après avoir fait une recherche et cliqué sur le lien de la facture. */
+function QueryNavLink({ to, ...props }) {
+    let location = useLocation();
+    return <NavLink to={to + location.search} {...props} />
+}
 
 export default function Invoices() {
     /* Nous appelons ici la liste des factures enregistrées dans
@@ -57,21 +64,24 @@ export default function Invoices() {
                     .map((invoice) => (
                     /* Ici, nous avons remplacé <Link /> par <NavLink /> dans le but de
                         dynamiser le style des liens en fonction de l'action de l'utilisateur */
-                    <NavLink
-                    style={({ isActive }) => {
-                        return {
-                            display: "block",
-                            margin: "1rem 0",
-                            color: isActive ? "red" : "",
-                        }
-                    }}
-                    /* avec className pour utilisation dans un fichier CSS =>
-                        className={({ isActive }) => isActive ? "red" : "blue"} */
-                    to={`/invoices/${invoice.number}`}
-                    key={invoice.number}
-                    >
-                    {invoice.name}
-                    </NavLink>
+                    /* EDIT : Nous avons remplacé <NavLink /> par <QueryNavLink /> dans le but
+                        de garder en mémoire l'état de la liste des factures après avoir
+                        fait une recherche et cliqué sur le lien */
+                    <QueryNavLink
+                        style={({ isActive }) => {
+                            return {
+                                display: "block",
+                                margin: "1rem 0",
+                                color: isActive ? "red" : "",
+                            }
+                        }}
+                        /* avec className pour utilisation dans un fichier CSS =>
+                            className={({ isActive }) => isActive ? "red" : "blue"} */
+                        to={`/invoices/${invoice.number}`}
+                        key={invoice.number}
+                        >
+                        {invoice.name}
+                    </QueryNavLink>
                 ))}
             </nav>
             <Outlet />
