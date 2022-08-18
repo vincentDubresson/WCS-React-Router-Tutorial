@@ -7,7 +7,8 @@ import { NavLink, Outlet, useSearchParams, useLocation } from 'react-router-dom'
 import { getInvoices } from '../datas/Invoices';
 
 /* Cette fonction va nous servir à garder en mémoire l'état de la liste des
-factures, même après avoir fait une recherche et cliqué sur le lien de la facture. */
+factures, même après avoir fait une recherche et cliqué sur le lien de la facture.
+VOUS POUVEZ METTRE CETTE FONCTION N'IMPORTE OU ET L'EXPORTER */
 function QueryNavLink({ to, ...props }) {
     let location = useLocation();
     return <NavLink to={to + location.search} {...props} />
