@@ -8,7 +8,7 @@ import Navbar from './components/Navbar';
 
 export default function App() {
   return (
-    <div>
+    <div style={{ padding: "1rem 0" }}>
       <Navbar />
       <h1>Bookkeeper!</h1>
     </div>
