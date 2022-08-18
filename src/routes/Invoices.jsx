@@ -3,7 +3,7 @@
  * Ce n'est pas obligatoire mais cela rend l'organisation plus simple
  * si vous êtes ammené à développer un grosse application.
  */
-import { Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import { getInvoices } from '../datas/Invoices';
 
 export default function Invoices() {
@@ -27,13 +27,23 @@ export default function Invoices() {
             {/* La fonction map sert à créer un nouveau tableau à partir d'un tableau.
                     Ici, elle nous sert à transformer notre tableau de données en liens. */}
             {invoices.map((invoice) => (
-                <Link
-                style={{ display: "block", margin: "1rem 0" }}
+                /* Ici, nous avons remplacé <Link /> par <NavLink /> dans le but de
+                    dynamiser le style des liens en fonction de l'action de l'utilisateur */
+                <NavLink
+                style={({ isActive }) => {
+                    return {
+                        display: "block",
+                        margin: "1rem 0",
+                        color: isActive ? "red" : "",
+                    }
+                }}
+                /* avec className pour utilisation dans un fichier CSS =>
+                    className={({ isActive }) => isActive ? "red" : "blue"} */
                 to={`/invoices/${invoice.number}`}
                 key={invoice.number}
                 >
                 {invoice.name}
-                </Link>
+                </NavLink>
             ))}
             </nav>
             <Outlet />
